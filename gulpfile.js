@@ -26,7 +26,7 @@ gulp.task('serve', ['js','css'], function() {
 gulp.task('js', function() {
     return gulp.src('app/*.js')
         .pipe(babel({
-            presets: ["stage-3","stage-4"]
+            presets: ["es2015"]
         }))
         .pipe(gulp.dest('dist'))
         .pipe(browserSync.stream());
@@ -41,5 +41,6 @@ gulp.task('css', function () {
         }))
         .pipe(gulp.dest('dist/css'));
 });
-
+gulp.task('build:js', ['js']);
+gulp.task('build:css', ['css']);
 gulp.task('default', ['serve']);
