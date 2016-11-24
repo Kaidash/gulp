@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var plumber = require('gulp-plumber');
 var babel = require('gulp-babel');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
@@ -25,6 +26,7 @@ gulp.task('serve', ['js','css'], function() {
 
 gulp.task('js', function() {
     return gulp.src('app/*.js')
+        .pipe(plumber())
         .pipe(babel({
             presets: ["es2015"]
         }))
@@ -34,7 +36,8 @@ gulp.task('js', function() {
 
 gulp.task('css', function () {
     return gulp.src('app/sass/**/*.scss')
-        .pipe(sass().on('error', sass.logError))
+        .pipe(plumber())
+        .pipe(sass())
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
